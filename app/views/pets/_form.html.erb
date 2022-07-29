@@ -1,5 +1,5 @@
 <%= simple_form_for(pet) do |f| %>
   <%= f.input :name %>
-  <%= f.input :species %>
+  <%= f.input :species, collection: Pet::SPECIES %>
   <%= f.submit value: btn_text, class: btn_class %>
 <% end %>
