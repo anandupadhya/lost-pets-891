@@ -1,8 +1,3 @@
-<%= form_for(@pet) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :species %>
-  <%= f.text_field :species %>
-  <%= f.submit %>
-<% end %>
+<%= render 'form', pet: @pet, btn_class: "btn btn-warning", btn_text: "Update" %>
+
 <p><%= link_to 'Cancel', pets_path %></p>

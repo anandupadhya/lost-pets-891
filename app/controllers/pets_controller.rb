@@ -1,10 +1,12 @@
 class PetsController < ApplicationController
+  before_action :set_pet, only: [:show, :edit, :update, :destroy]
+
   def index
     @pets = Pet.all.reverse
   end
 
   def show
-    @pet = Pet.find(params[:id])
+    # @pet = Pet.find(params[:id])
   end
 
   def new
@@ -14,26 +16,29 @@ class PetsController < ApplicationController
   def create
     @pet = Pet.new(pet_params)
     @pet.found_on = Date.today
-    @pet.save
-
-    redirect_to pet_path(@pet)
+    if @pet.save
+      redirect_to pet_path(@pet)
+    else
+      render 'new', status: :unprocessable_entity
+    end
   end
 
   def edit
-    @pet = Pet.find(params[:id])
+    # @pet = Pet.find(params[:id])
   end
 
   def update
-    @pet = Pet.find(params[:id])
-    @pet.update(pet_params)
-
-    redirect_to pet_path(@pet)
+    # @pet = Pet.find(params[:id])
+    if @pet.update(pet_params)
+      redirect_to pet_path(@pet)
+    else
+      render 'edit', status: :unprocessable_entity
+    end
   end
 
   def destroy
-    @pet = Pet.find(params[:id])
+    # @pet = Pet.find(params[:id])
     @pet.destroy
-
     redirect_to pets_path, status: :see_other
   end
 
@@ -41,5 +46,9 @@ class PetsController < ApplicationController
 
   def pet_params
     params.require(:pet).permit(:name, :species)
+  end
+
+  def set_pet
+    @pet = Pet.find(params[:id])
   end
 end

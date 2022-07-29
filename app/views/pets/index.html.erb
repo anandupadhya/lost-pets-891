@@ -1,10 +1,11 @@
 <h1>Lost Pets</h1>
-<p><%= link_to 'Report', new_pet_path %></p>
+<p><%= link_to 'Report', new_pet_path, class: "btn btn-primary" %></p>
 
 <% @pets.each do |pet| %>
-  <div>
-    <h3><%= pet.name %> - <em><%= pet.species %> (id: <%= pet.id %>)</em></h3>
-    <p>Found on: <%= pet.found_on %></p>
-    <%= link_to 'View', pet_path(pet) %>
-  </div>
+  <%= link_to pet_path(pet), class: "no-text-decoration" do %>
+    <div class="card m-3 p-3">
+      <h3><%= pet.name %> - <em><%= pet.species %> (id: <%= pet.id %>)</em></h3>
+      <p>Found on: <%= pet.found_on %></p>
+    </div>
+  <% end %>
 <% end %>
